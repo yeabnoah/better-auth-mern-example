@@ -2,11 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,6 +26,12 @@ export function SignUp() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const session = authClient.useSession();
+
+  if (session) {
+    navigate("/dashboard");
+  }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -162,7 +168,7 @@ export function SignUp() {
                     },
                     onSuccess: async () => {
                       // router.push("/auth/signin");
-                      navigate("/auth/signin")
+                      navigate("/auth/signin");
                       toast.success("Account created successfully");
                     },
                   },

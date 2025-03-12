@@ -22,6 +22,11 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [loading] = useState(false);
   const navigate = useNavigate();
+  const session = authClient.useSession();
+
+  if (session) {
+    navigate("/dashboard");
+  }
 
   return (
     <div className=" flex min-h-screen w-full justify-center items-center">

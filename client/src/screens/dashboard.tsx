@@ -1,10 +1,16 @@
+import { authClient } from "@/lib/auth-client";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  return (
-    <div>
-      Dashborad screen
-    </div>
-  )
-}
+  const session = authClient.useSession();
+  const navigate = useNavigate();
 
-export default Dashboard
+  if (!session) {
+    
+    navigate("/auth/signin");
+  }
+
+  return <div>Dashborad screen</div>;
+};
+
+export default Dashboard;
